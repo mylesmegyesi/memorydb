@@ -1,8 +1,8 @@
 require 'time'
-require 'repository/cursor'
-require 'repository/filter_factory'
+require 'memorydb/cursor'
+require 'memorydb/filter_factory'
 
-module Repository
+module MemoryDb
   class Base
 
     def find

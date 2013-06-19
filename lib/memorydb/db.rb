@@ -1,6 +1,6 @@
 require 'multi_json'
-require 'repository/base'
-require 'repository/cursor'
+require 'memorydb/base'
+require 'memorydb/cursor'
 
 # for sorting on booleans
 class FalseClass
@@ -23,8 +23,8 @@ class TrueClass
   end
 end
 
-module Repository
-  class Memory < Base
+module MemoryDb
+  class Db < Base
 
     def initialize(model_klass, options={})
       @model_klass = model_klass

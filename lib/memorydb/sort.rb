@@ -1,4 +1,4 @@
-module Repository
+module MemoryDb
   class Sort
 
     attr_reader :field, :order

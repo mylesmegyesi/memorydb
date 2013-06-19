@@ -1,8 +1,8 @@
-require 'repository/filter'
-require 'repository/sort'
-require 'repository/filter_factory'
+require 'memorydb/filter'
+require 'memorydb/sort'
+require 'memorydb/filter_factory'
 
-module Repository
+module MemoryDb
   class Cursor
 
     def initialize(query_executor)

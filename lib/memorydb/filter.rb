@@ -1,4 +1,4 @@
-module Repository
+module MemoryDb
   class Filter
 
     attr_reader :field, :operator, :value

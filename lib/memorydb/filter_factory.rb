@@ -1,6 +1,6 @@
-require 'repository/filter'
+require 'memorydb/filter'
 
-module Repository
+module MemoryDb
   class FilterFactory
 
     def eq(field, value)
