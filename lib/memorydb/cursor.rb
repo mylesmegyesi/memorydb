@@ -61,6 +61,16 @@ module MemoryDb
       self
     end
 
+    def and(*filters)
+      @filters << filter_factory.and(*filters)
+      self
+    end
+
+    def not(filter)
+      @filters << filter_factory.not(filter)
+      self
+    end
+
     def sort(field, order)
       assert_field!(field)
       assert_order!(order)

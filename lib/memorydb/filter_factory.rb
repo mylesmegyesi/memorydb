@@ -59,6 +59,14 @@ module MemoryDb
       Filter.new(nil, 'or', filters)
     end
 
+    def and(*filters)
+      Filter.new(nil, 'and', filters)
+    end
+
+    def not(filter)
+      Filter.new(nil, 'not', filter)
+    end
+
     private
 
     def assert_to_a!(name, value)
