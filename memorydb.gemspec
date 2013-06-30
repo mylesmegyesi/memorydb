@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name          = "memorydb"
-  gem.version       = '0.0.1'
+  gem.version       = '0.0.2'
   gem.authors       = ["Myles Megyesi"]
   gem.email         = ["myles.megyesi@gmail.com"]
   gem.description   = 'An in memory database'
