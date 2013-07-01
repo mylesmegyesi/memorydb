@@ -40,14 +40,15 @@ module MemoryDb
     def model_or_hash_as_attrs(model_or_hash)
       if model_or_hash
         if model_or_hash.is_a?(Hash)
-          model_or_hash
+          verify_attributes!(model_or_hash)
+          model_klass.new(model_or_hash).attributes
         elsif model_or_hash.is_a?(model_klass)
           model_or_hash.attributes
         else
           raise ArgumentError.new("A hash or a #{model_klass} must be given to create a record")
         end
       else
-        {}
+        model_klass.new({}).attributes
       end
     end
 

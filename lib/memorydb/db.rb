@@ -1,4 +1,3 @@
-require 'multi_json'
 require 'memorydb/base'
 require 'memorydb/cursor'
 
@@ -33,10 +32,9 @@ module MemoryDb
       @primary_key = options[:primary_key]
     end
 
-    def create!(attrs={})
+    def create!(given={})
       _id = id
-      attrs = model_or_hash_as_attrs(attrs)
-      verify_attributes!(attrs)
+      attrs = model_or_hash_as_attrs(given)
       attributes = attrs.merge(primary_key => _id)
       store!(_id, attributes)
       model_klass.new(attributes)
@@ -189,13 +187,11 @@ module MemoryDb
     end
 
     def all_models
-      @store.values.map do |raw_record|
-        model_klass.new(MultiJson.load(raw_record)).attributes
-      end
+      @store.values
     end
 
     def store!(id, attributes)
-      @store[id] = MultiJson.dump(attributes)
+      @store[id] = attributes
     end
 
     def remove_model!(model)
