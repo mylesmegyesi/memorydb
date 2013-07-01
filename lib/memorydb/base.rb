@@ -48,7 +48,7 @@ module MemoryDb
           raise ArgumentError.new("A hash or a #{model_klass} must be given to create a record")
         end
       else
-        model_klass.new({}).attributes
+        {}
       end
     end
 
