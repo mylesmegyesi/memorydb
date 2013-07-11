@@ -37,29 +37,37 @@ module MemoryDb
       attrs = model_or_hash_as_attrs(given)
       attributes = attrs.merge(primary_key => _id)
       store!(_id, attributes)
-      model_klass.new(attributes)
+      return_model_or_hash(attributes)
+    end
+
+    def return_model_or_hash(attrs)
+      if model_klass
+        model_klass.new(attrs)
+      else
+        attrs
+      end
     end
 
     def update!(model_or_id, attributes={})
       attributes ||= {}
-      model = case
-              when model_or_id.is_a?(model_klass)
-                if model = find_by_id(model_or_id.send(primary_key))
-                  model_or_id
-                else
-                  raise ArgumentError.new("Could not update record with id: #{model_or_id.send(primary_key)} because it does not exist") unless model
-                end
+      model_or_hash = case
+                      when model_klass && model_or_id.is_a?(model_klass)
+                        if model = find_by_id(model_or_id.send(primary_key))
+                          model_or_id
+                        else
+                          raise ArgumentError.new("Could not update record with id: #{model_or_id.send(primary_key)} because it does not exist") unless model
+                        end
 
-              else
-                if model = find_by_id(model_or_id)
-                  model
-                else
-                  raise ArgumentError.new("Could not update record with id: #{model_or_id} because it does not exist") unless model
-                end
-              end
-      updated_attrs = model.attributes.merge(attributes_without_pkey(attributes))
-      store!(model.send(primary_key), updated_attrs)
-      model_klass.new(updated_attrs)
+                      else
+                        if model = find_by_id(model_or_id)
+                          model
+                        else
+                          raise ArgumentError.new("Could not update record with id: #{model_or_id} because it does not exist") unless model
+                        end
+                      end
+      updated_attrs = model_or_hash_as_attrs(model_or_hash).merge(attributes_without_pkey(attributes))
+      store!(model_or_hash[primary_key], updated_attrs)
+      return_model_or_hash(updated_attrs)
     end
 
     def find_by_id(id)
@@ -80,7 +88,11 @@ module MemoryDb
 
     def execute_find(query)
       models = raw_find(query)
-      models.map { |h| model_klass.new(h) }
+      if model_klass
+        models.map { |h| model_klass.new(h) }
+      else
+        models
+      end
     end
 
     def execute_count(query)
@@ -195,7 +207,7 @@ module MemoryDb
     end
 
     def remove_model!(model)
-      @store.delete(model.send(primary_key))
+      @store.delete(model[primary_key])
       nil
     end
 
