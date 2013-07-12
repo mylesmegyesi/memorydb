@@ -142,7 +142,7 @@ module MemoryDb
     end
 
     def filter_matches?(filter, hash)
-      value = filter.field ? hash.fetch(filter.field) : nil
+      value = filter.field ? hash[filter.field] : nil
       case filter.operator
       when '='; value == filter.value
       when '!='; value != filter.value
@@ -176,7 +176,7 @@ module MemoryDb
     end
 
     def compare_model(model1, model2, sort)
-      field1, field2 = model1.fetch(sort.field), model2.fetch(sort.field)
+      field1, field2 = model1[sort.field], model2[sort.field]
       field1 == field2                         ?  nil :
         field1 < field2 && sort.order == :asc  ?  -1  :
         field1 > field2 && sort.order == :desc ?  -1  : 1
