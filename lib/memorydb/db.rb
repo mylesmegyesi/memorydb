@@ -177,9 +177,9 @@ module MemoryDb
 
     def compare_model(model1, model2, sort)
       field1, field2 = model1[sort.field], model2[sort.field]
-      field1 == field2                         ?  nil :
-        (field1.nil? ? true : (field1 < field2)) && sort.order == :asc  ?  -1  :
-        (field1.nil? ? false : (field1 > field2)) && sort.order == :desc ?  -1  : 1
+      field1 == field2 ?  nil :
+        (field1.nil? ? true : (field2.nil? ? false : (field1 < field2))) && sort.order == :asc  ?  -1  :
+        (field1.nil? ? false : (field2.nil? ? true : (field1 > field2))) && sort.order == :desc ?  -1  : 1
     end
 
     def limit_models(models, limit)
