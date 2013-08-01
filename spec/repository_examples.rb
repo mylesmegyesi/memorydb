@@ -626,5 +626,7 @@ shared_examples_for 'repository' do |model_klass, domain_model_klass, repo_optio
     expect {repo.find.like(:asdf, nil)}.to \
       raise_error(ArgumentError, "Value must be a String or Symbol but you gave #{PP.pp(nil, '')}")
   end
+
+  it 'sorts on nils'
 end
 

@@ -146,10 +146,10 @@ module MemoryDb
       case filter.operator
       when '='; value == filter.value
       when '!='; value != filter.value
-      when '<'; value && value < filter.value
-      when '<='; value && value <= filter.value
-      when '>'; value && value > filter.value
-      when '>='; value && value >= filter.value
+      when '<'; value && (value < filter.value)
+      when '<='; value && (value <= filter.value)
+      when '>'; value && (value > filter.value)
+      when '>='; value && (value >= filter.value)
       when 'in'; filter.value.include?(value)
       when '!in'; !filter.value.include?(value)
       when 'or'; filter.value.any? do |sub_filter|
@@ -178,8 +178,8 @@ module MemoryDb
     def compare_model(model1, model2, sort)
       field1, field2 = model1[sort.field], model2[sort.field]
       field1 == field2                         ?  nil :
-        field1 < field2 && sort.order == :asc  ?  -1  :
-        field1 > field2 && sort.order == :desc ?  -1  : 1
+        (field1.nil? ? true : (field1 < field2)) && sort.order == :asc  ?  -1  :
+        (field1.nil? ? false : (field1 > field2)) && sort.order == :desc ?  -1  : 1
     end
 
     def limit_models(models, limit)
