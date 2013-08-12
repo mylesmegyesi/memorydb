@@ -43,6 +43,11 @@ module MemoryDb
       Filter.new(field, 'in', value.to_a)
     end
 
+    def contains(field, value)
+      assert_field!(field)
+      Filter.new(field, 'contains', value)
+    end
+
     def not_in(field, value)
       assert_field!(field)
       assert_to_a!('Exclusion', value)

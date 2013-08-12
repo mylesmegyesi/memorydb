@@ -628,5 +628,6 @@ shared_examples_for 'repository' do |model_klass, domain_model_klass, repo_optio
   end
 
   it 'sorts on nils'
+  it 'contains filter'
 end
 

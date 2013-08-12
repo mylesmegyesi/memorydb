@@ -46,6 +46,11 @@ module MemoryDb
       self
     end
 
+    def contains(field, value)
+      @filters << filter_factory.contains(field, value)
+      self
+    end
+
     def not_in(field, value)
       @filters << filter_factory.not_in(field, value)
       self

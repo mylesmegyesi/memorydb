@@ -150,6 +150,7 @@ module MemoryDb
       when '<='; value && (value <= filter.value)
       when '>'; value && (value > filter.value)
       when '>='; value && (value >= filter.value)
+      when 'contains'; value && value.include?(filter.value)
       when 'in'; filter.value.include?(value)
       when '!in'; !filter.value.include?(value)
       when 'or'; filter.value.any? do |sub_filter|
