@@ -198,7 +198,7 @@ shared_examples_for 'repository' do |model_klass, domain_model_klass, repo_optio
     end
 
     it 'equality filter raises an error for a bad field name' do
-      field = mock
+      field = double
       expect {repo.find.eq(field, 'Steve')}.to \
         raise_error(ArgumentError, "Field name must be a String or Symbol but you gave #{PP.pp(field, '')}")
       expect {repo.find.eq(nil, 'Steve')}.to \
@@ -226,7 +226,7 @@ shared_examples_for 'repository' do |model_klass, domain_model_klass, repo_optio
     end
 
     it 'inequality filter raises an error for a bad field name' do
-      field = mock
+      field = double
       expect {repo.find.not_eq(field, 'Steve')}.to \
         raise_error(ArgumentError, "Field name must be a String or Symbol but you gave #{PP.pp(field, '')}")
       expect {repo.find.not_eq(nil, 'Steve')}.to \
@@ -257,7 +257,7 @@ shared_examples_for 'repository' do |model_klass, domain_model_klass, repo_optio
     end
 
     it 'less than filter raises an error for a bad field name' do
-      field = mock
+      field = double
       expect {repo.find.lt(field, 'Steve')}.to \
         raise_error(ArgumentError, "Field name must be a String or Symbol but you gave #{PP.pp(field, '')}")
       expect {repo.find.lt(nil, 'Steve')}.to \
@@ -288,7 +288,7 @@ shared_examples_for 'repository' do |model_klass, domain_model_klass, repo_optio
     end
 
     it 'less than or equal to filter raises an error for a bad field name' do
-      field = mock
+      field = double
       expect {repo.find.lte(field, 'Steve')}.to \
         raise_error(ArgumentError, "Field name must be a String or Symbol but you gave #{PP.pp(field, '')}")
       expect {repo.find.lte(nil, 'Steve')}.to \
@@ -318,7 +318,7 @@ shared_examples_for 'repository' do |model_klass, domain_model_klass, repo_optio
     end
 
     it 'greater than filter raises an error for a bad field name' do
-      field = mock
+      field = double
       expect {repo.find.gt(field, 'Steve')}.to \
         raise_error(ArgumentError, "Field name must be a String or Symbol but you gave #{PP.pp(field, '')}")
       expect {repo.find.gt(nil, 'Steve')}.to \
@@ -347,7 +347,7 @@ shared_examples_for 'repository' do |model_klass, domain_model_klass, repo_optio
     end
 
     it 'greater than or equal to filter raises an error for a bad field name' do
-      field = mock
+      field = double
       expect {repo.find.gte(field, 'Steve')}.to \
         raise_error(ArgumentError, "Field name must be a String or Symbol but you gave #{PP.pp(field, '')}")
       expect {repo.find.gte(nil, 'Steve')}.to \
@@ -383,7 +383,7 @@ shared_examples_for 'repository' do |model_klass, domain_model_klass, repo_optio
     end
 
     it 'inclusion filter raises an error for a bad field name' do
-      field = mock
+      field = double
       expect {repo.find.in(field, ['Steve'])}.to \
         raise_error(ArgumentError, "Field name must be a String or Symbol but you gave #{PP.pp(field, '')}")
       expect {repo.find.in(nil, ['Steve'])}.to \
@@ -426,7 +426,7 @@ shared_examples_for 'repository' do |model_klass, domain_model_klass, repo_optio
     end
 
     it 'exclusion filter raises an error for a bad field name' do
-      field = mock
+      field = double
       expect {repo.find.not_in(field, ['Steve'])}.to \
         raise_error(ArgumentError, "Field name must be a String or Symbol but you gave #{PP.pp(field, '')}")
       expect {repo.find.not_in(nil, ['Steve'])}.to \
@@ -506,7 +506,7 @@ shared_examples_for 'repository' do |model_klass, domain_model_klass, repo_optio
   end
 
   it 'sort raises an error for a bad field name' do
-    field = mock
+    field = double
     expect {repo.find.sort(field, :asc)}.to \
       raise_error(ArgumentError, "Field name must be a String or Symbol but you gave #{PP.pp(field, '')}")
     expect {repo.find.sort(nil, :asc)}.to \
@@ -527,7 +527,7 @@ shared_examples_for 'repository' do |model_klass, domain_model_klass, repo_optio
   end
 
   it 'limit raises an error if not an integer' do
-    limit = mock
+    limit = double
     expect {repo.find.sort(:name, :asc).limit(limit)}.to \
       raise_error(ArgumentError, "Limit must be an integer but you gave #{PP.pp(limit, '')}")
   end
@@ -541,7 +541,7 @@ shared_examples_for 'repository' do |model_klass, domain_model_klass, repo_optio
   end
 
   it 'offset raises an error if not an integer' do
-    offset = mock
+    offset = double
     expect {repo.find.sort(:name, :asc).offset(offset)}.to \
       raise_error(ArgumentError, "Offset must be an integer but you gave #{PP.pp(offset, '')}")
   end
@@ -612,7 +612,7 @@ shared_examples_for 'repository' do |model_klass, domain_model_klass, repo_optio
   end
 
   it 'like filter raises an error for a bad field name' do
-    field = mock
+    field = double
     expect {repo.find.like(field, 'asdf')}.to \
       raise_error(ArgumentError, "Field name must be a String or Symbol but you gave #{PP.pp(field, '')}")
     expect {repo.find.like(nil, 'asdf')}.to \
@@ -620,7 +620,7 @@ shared_examples_for 'repository' do |model_klass, domain_model_klass, repo_optio
   end
 
   it 'like filter raises an error for a bad value' do
-    field = mock
+    field = double
     expect {repo.find.like(:asdf, field)}.to \
       raise_error(ArgumentError, "Value must be a String or Symbol but you gave #{PP.pp(field, '')}")
     expect {repo.find.like(:asdf, nil)}.to \
