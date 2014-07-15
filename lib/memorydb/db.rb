@@ -1,27 +1,6 @@
 require 'memorydb/base'
 require 'memorydb/cursor'
 
-# for sorting on booleans
-class FalseClass
-  def <(other)
-    other
-  end
-
-  def >(other)
-    false
-  end
-end
-
-class TrueClass
-  def <(other)
-    other
-  end
-
-  def >(other)
-    true
-  end
-end
-
 module MemoryDb
   class Db < Base
 
