@@ -26,6 +26,21 @@ shared_examples_for 'repository' do |model_klass, domain_model_klass, repo_optio
     result
   end
 
+  context 'options' do
+    context 'id' do
+      it 'randomises id' do
+        options = repo_options.merge(random_id: true)
+        created_record = described_class.new(model_klass, options).create!
+        created_record.id.should_not == 1
+      end
+
+      it 'defaults to 1' do
+        created_record = repo.create!
+        created_record.id.should == 1
+      end
+    end
+  end
+
   context 'create!' do
 
     it 'creates a record an empty record' do

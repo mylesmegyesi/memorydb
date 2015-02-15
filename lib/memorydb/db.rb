@@ -24,11 +24,12 @@ end
 
 module MemoryDb
   class Db < Base
+    DEFAULT_ID = 0
 
     def initialize(model_klass, options={})
       @model_klass = model_klass
-      @id = 0
       @store = {}
+      @id = initialize_id(options[:random_id])
       @primary_key = options[:primary_key]
     end
 
@@ -210,6 +211,15 @@ module MemoryDb
     def remove_model!(model)
       @store.delete(model[primary_key])
       nil
+    end
+
+    def initialize_id(random_id)
+      return randomized_id if random_id
+      DEFAULT_ID
+    end
+
+    def randomized_id
+      rand(1000) + 1
     end
 
     def id
